@@ -14,6 +14,10 @@ public class testejdbc  {
         UserPosDAO userPosDAO = new UserPosDAO();
         UserPosJava userPosJava = new UserPosJava();
 
+        userPosJava.setId(4L);
+        userPosJava.setNome("mateus");
+        userPosJava.setEmail("mateus@gmail.com");
+
         userPosDAO.salvar(userPosJava);
     }
 }
