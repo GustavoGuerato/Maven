@@ -36,4 +36,11 @@ public class testejdbc  {
         }
 
     }
+
+    @Test
+    public void initBuscar() throws Exception {
+        UserPosDAO dao = new UserPosDAO();
+
+        UserPosJava userPosJava = dao.buscar(2L);
+    }
 }

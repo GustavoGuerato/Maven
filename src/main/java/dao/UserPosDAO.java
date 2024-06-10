@@ -53,4 +53,37 @@ public class UserPosDAO {
         }
         return list;
     }
+
+    public UserPosJava buscar (long l) throws Exception{
+       UserPosJava retorno = new UserPosJava();
+        String sql = "select * from userposjava where id = " + retorno.getId();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultado = statement.executeQuery();
+
+        while(resultado.next()){
+            UserPosJava userPosJava = new UserPosJava();
+            userPosJava.setId(resultado.getLong("id"));
+            userPosJava.setNome(resultado.getString("nome"));
+            userPosJava.setEmail(resultado.getString("email"));
+
+
+        }
+        return retorno;
+    }
+
+    public void atualizar(UserPosJava userPosJava) {
+        try {
+            String sql = "update userposjava set nome = ? where id = " + userPosJava.getId();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,userPosJava.getNome());
+
+            statement.execute();
+            connection.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+
 }
