@@ -6,6 +6,7 @@ import model.UserPosJava;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class testejdbc  {
 
@@ -19,5 +20,20 @@ public class testejdbc  {
         userPosJava.setEmail("mateus@gmail.com");
 
         userPosDAO.salvar(userPosJava);
+    }
+
+    @Test
+    public void initListar() throws Exception {
+        UserPosDAO dao = new UserPosDAO();
+        try{
+            List<UserPosJava> list = dao.listar();
+            for (UserPosJava userPosJava : list){
+                System.out.println(userPosJava);
+                System.out.println("-----------------");
+            }
+        }catch (Exception e ){
+            e.printStackTrace();
+        }
+
     }
 }
