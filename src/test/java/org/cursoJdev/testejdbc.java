@@ -43,4 +43,21 @@ public class testejdbc  {
 
         UserPosJava userPosJava = dao.buscar(2L);
     }
+
+    @Test
+    public void initAtualizar(){
+        UserPosDAO dao = new UserPosDAO();
+        try {
+            UserPosJava objetoBanco = dao.buscar(1L);
+
+            objetoBanco.setNome("Nome mudado com sucesso");
+
+            dao.atualizar(objetoBanco);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
 }

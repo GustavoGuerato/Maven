@@ -80,6 +80,11 @@ public class UserPosDAO {
             statement.execute();
             connection.commit();
         }catch (Exception e){
+            try {
+                connection.rollback();
+            }catch (SQLException e1){
+                e1.printStackTrace();
+            }
             e.printStackTrace();
         }
 
