@@ -19,11 +19,11 @@ public class UserPosDAO {
 
     public void salvar(UserPosJava userPosJava) throws SQLException {
         try {
-            String sql = "insert into userposjava(id, nome, email) values(?,?,?)";
+            String sql = "insert into userposjava( nome, email) values(?,?)";
             PreparedStatement insert = connection.prepareStatement(sql);
-            insert.setLong(1,userPosJava.getId());
-            insert.setString(2, userPosJava.getNome());
-            insert.setString(3, userPosJava.getEmail());
+
+            insert.setString(1, userPosJava.getNome());
+            insert.setString(2, userPosJava.getEmail());
             insert.execute();
             connection.commit();
         }catch (Exception e){
@@ -54,9 +54,9 @@ public class UserPosDAO {
         return list;
     }
 
-    public UserPosJava buscar(long id) throws Exception {
+    public UserPosJava buscar(Long id) throws Exception {
         UserPosJava retorno = null;
-        String sql = "SELECT * FROM userposjava WHERE id = ?";
+        String sql = "SELECT * FROM userposjava WHERE id = " + id;
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, id);
             try (ResultSet resultado = statement.executeQuery()) {
@@ -89,6 +89,22 @@ public class UserPosDAO {
             e.printStackTrace();
         }
 
+    }
+
+    public void deletar(Long id){
+        try{
+            String sql = "delete from userposjava where id = " + id;
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.execute();
+            connection.commit();
+        }catch (Exception e){
+            try {
+                connection.rollback();
+            }catch (SQLException e1){
+                e1.printStackTrace();
+            }
+            e.printStackTrace();
+        }
     }
 
 
