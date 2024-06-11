@@ -28,4 +28,13 @@ public class BeanUserForm {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "BeanUserForm{" +
+                "nome='" + nome + '\'' +
+                ", numero='" + numero + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

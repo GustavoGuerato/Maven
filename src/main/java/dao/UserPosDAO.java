@@ -1,6 +1,7 @@
 package dao;
 
 import conexaojdbc.SingleConnection;
+import model.BeanUserForm;
 import model.Telefone;
 import model.UserPosJava;
 
@@ -89,6 +90,24 @@ public class UserPosDAO {
             }
         }
         return retorno;
+    }
+
+    public List<BeanUserForm> listtaUserFone(Long idUser){
+        List<BeanUserForm> beanUserFones = new ArrayList<BeanUserForm>();
+
+        String sql = " select nome, numero, email from telefoneuser as fone ";
+        sql +=" inner join userposjava as userp ";
+        sql +=" on fone.usuariopessoa = userp.id ";
+        sql += " where userp.id = " + idUser;
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return beanUserFones;
     }
 
 
