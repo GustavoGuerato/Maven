@@ -1,6 +1,7 @@
 package dao;
 
 import conexaojdbc.SingleConnection;
+import model.Telefone;
 import model.UserPosJava;
 
 import java.sql.Connection;
@@ -35,6 +36,25 @@ public class UserPosDAO {
             e.printStackTrace();
         }
 
+    }
+
+
+    public void salvarTelefone(Telefone telefone){
+        try {
+            String sql = "INSERT INTO public.telefoneuser(numero, tipo, usuariopessoa) VALUES ( ?, ?, ?);";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, telefone.getNumero());
+            statement.setString(2, telefone.getTipo());
+            statement.setLong(3,telefone.getUsuario());
+            statement.execute();
+            connection.commit();
+        }catch (Exception e){
+            try {
+                connection.rollback();
+            }catch (SQLException e1 ){
+                e1.printStackTrace();
+            }
+        }
     }
 
     public List<UserPosJava> listar () throws Exception{

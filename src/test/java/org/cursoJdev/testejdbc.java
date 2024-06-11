@@ -2,6 +2,7 @@ package org.cursoJdev;
 
 import conexaojdbc.SingleConnection;
 import dao.UserPosDAO;
+import model.Telefone;
 import model.UserPosJava;
 import org.junit.Test;
 
@@ -69,5 +70,16 @@ public class testejdbc  {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void testeInserTelefone(){
+        Telefone telefone = new Telefone();
+        telefone.setNumero("(11)3920134812");
+        telefone.setTipo("Casa");
+        telefone.setUsuario(3L);
+
+        UserPosDAO dao = new UserPosDAO();
+        dao.salvarTelefone(telefone);
     }
 }
