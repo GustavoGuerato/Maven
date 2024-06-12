@@ -102,6 +102,16 @@ public class UserPosDAO {
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()){
+                BeanUserForm userForm = new BeanUserForm();
+                userForm.setEmail(resultSet.getString("email"));
+                userForm.setNome(resultSet.getString("nome"));
+                userForm.setNumero(resultSet.getString("numero"));
+                beanUserFones.add(userForm);
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
